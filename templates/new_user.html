@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Create new user</h2>
+
+  <form method="POST" action="{{ url_for('new_user') }}">
+    <label>Username</label>
+    <input type="text" name="username" required>
+    <button type="submit">Create</button>
+  </form>
+ 
+{% endblock %}

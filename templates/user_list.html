@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>All users</h2>
+  <a class="btn" href="{{ url_for('new_user') }}">Create New User</a>
+
+  <ul class="items">
+    {% for user in users %}
+      <li>{{ user.username }} (id: {{ user.id }})</li>
+    {% else %}
+      <li>No users yet</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

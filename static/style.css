@@ -1,0 +1,36 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 0;
+    margin: 0;
+    background: #f7f7f7;
+}
+
+.navbar {
+    background: #333;
+    padding: 10px;
+}
+
+.navbar a {
+    color: rgb(25, 0, 255);
+    margin-right: 14px;
+    text-decoration: none;
+}
+
+.content {
+    padding: 22px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 7px 12px;
+    background: dodgerblue;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+}

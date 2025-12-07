@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>All Posts</h2>
+  <a class="btn" href="{{ url_for('new_post') }}">Create New Post</a>
+
+  <ul class="items">
+    {% for post in posts %}
+      <li>
+        <a href="{{ url_for('post_details', post_id=post.id) }}">{{ post.title }}</a>
+        {% if post.author %}
+          — <small>by {{ post.author.username }}</small>
+        {% endif %}
+      </li>
+    {% else %}
+      <li>No posts yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
