@@ -194,3 +194,17 @@ def not_found(e):
 
 if __name__ == "__main__":
     app.run(debug=True, host="127.0.0.1", port=5000)
+
+
+@app.route("/users/<int:user_id>/delete", methods=["POST"])
+def delete_user(user_id):
+    user = User.query.get_or_404(user_id)
+    Post.query.filter_by(user_id=user.id).delete()
+    Comment.query.filter_by(user_id=user.id).delete()
+    db.session.delete(user)
+    db.session.commit()
+    flash("User deleted", "success")
+    return redirect(url_for("users_list"))
+
+
+

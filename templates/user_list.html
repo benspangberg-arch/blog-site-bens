@@ -10,4 +10,14 @@
       <li>No users yet</li>
     {% endfor %}
   </ul>
+{% for user in users %}
+    <p>{{ user.username }}</p>
+    <form action="{{ url_for('delete_user', user_id=user.id) }}" method="POST">
+        <button type="submit">Delete User</button>
+    </form>
+{% endfor %}
+
+
+
+
 {% endblock %}
