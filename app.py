@@ -9,35 +9,37 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
+user_posts = db.Table(
+    'user_posts',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
+    db.Column('post_id', db.Integer, db.ForeignKey('post.id'), primary_key=True)
+)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120), unique=True, nullable=False)
-
     posts = db.relationship("Post", backref="author", lazy=True, cascade="all, delete-orphan")
     comments = db.relationship("Comment", backref="author", lazy=True, cascade="all, delete-orphan")
-
+    associated_posts = db.relationship("Post", secondary=user_posts, backref="associated_users", lazy='dynamic')
     def __repr__(self):
         return f"<User {self.username}>"
+
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
     content = db.Column(db.Text, nullable=False)
-
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True)
     comments = db.relationship("Comment", backref="post", lazy=True, cascade="all, delete-orphan")
-
     def __repr__(self):
         return f"<Post {self.title}>"
+
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.Text, nullable=False)
-
     post_id = db.Column(db.Integer, db.ForeignKey("post.id"), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True)
-
     def __repr__(self):
         return f"<Comment {self.id} on post {self.post_id}>"
 
