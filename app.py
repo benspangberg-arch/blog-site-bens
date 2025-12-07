@@ -206,5 +206,11 @@ def delete_user(user_id):
     flash("User deleted", "success")
     return redirect(url_for("users_list"))
 
+@app.route('/')
+def home():
+    image_base64 = "https://simplybuiltsites.com/wp-content/uploads/how-to-write-a-blog-post.png"
+    return render_template('index.html', image_base64=image_base64)
 
+if __name__ == "__main__":
+    app.run(debug=True)
 
